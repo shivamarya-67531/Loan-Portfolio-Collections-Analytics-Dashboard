@@ -1,0 +1,13 @@
+payment_status = {("On time", if (days past due = 0)), 
+			("Late", if (0 < days past due <= 15)),
+				("Over_due", else)}
+
+
+partial_payment = {("Yes", if (amount_due != amount_paid)),
+			("No", if (amount_due = amount_paid))}
+
+
+
+collection_team = {("Not Required", if (payment_status = "On Time" AND partial_payment = "No")),
+			("Digital Collection", if ((payment_status = "Late" OR payment_status = "Over Due") AND partial_payment = "No")),
+				("Due Collection Team", if (partial_payment = "Yes"))}
